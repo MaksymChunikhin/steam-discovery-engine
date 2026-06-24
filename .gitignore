@@ -1,0 +1,26 @@
+# Данные (тяжёлые, не в git)
+data/
+*.csv
+*.parquet
+*.json
+
+# Модели / артефакты
+models/
+*.faiss
+*.pkl
+*.pt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Секреты
+.env
