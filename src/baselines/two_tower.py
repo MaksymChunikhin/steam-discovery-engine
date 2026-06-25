@@ -31,13 +31,26 @@ class TwoTowerRecommender(BaseRecommender):
         self.user_col = user_col
         self.item_col = item_col
 
-    def fit(self, train: pd.DataFrame) -> "TwoTowerRecommender":
+    def fit(self, train: pd.DataFrame, eval_test: pd.DataFrame = None) -> "TwoTowerRecommender":
         self.data_ = build_two_tower_data(train, self.games, self.game_emb,
                                           self.game_ids, self.user_col, self.item_col)
+        d = self.data_
+
+        # Optional: build monitoring arrays from test (measured only, never trained on)
+        # Опционально: массивы для мониторинга из test (только измеряем, не обучаемся)
+        eval_data = None
+        if eval_test is not None:
+            et = eval_test[eval_test[self.user_col].isin(d["user_index"])
+                           & eval_test[self.item_col].isin(d["item_index"])]
+            eval_rows = et[self.user_col].map(d["user_index"]).to_numpy()
+            eval_truth = et[self.item_col].map(d["item_index"]).to_numpy()
+            eval_seen = [list(d["seen"].get(int(u), ())) for u in eval_rows]
+            eval_data = (eval_rows, eval_truth, eval_seen)
+
         self.model_, self.history_ = train_two_tower(
-            self.data_, epochs=self.epochs, batch_size=self.batch_size, lr=self.lr,
+            d, epochs=self.epochs, batch_size=self.batch_size, lr=self.lr,
             out_dim=self.out_dim, temperature=self.temperature, dropout=self.dropout,
-            device=self.device, seed=self.seed)
+            device=self.device, eval_data=eval_data, seed=self.seed)
 
         d = self.data_
         self.model_.eval()
