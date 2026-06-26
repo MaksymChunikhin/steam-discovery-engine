@@ -1,0 +1,4 @@
+# Dashboard talks to the API over HTTP — no ML dependencies here.
+# Дашборд общается с API по HTTP — здесь нет ML-зависимостей.
+streamlit
+requests

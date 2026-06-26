@@ -1,0 +1,28 @@
+# Keep the build context small: training data, notebooks, git, caches.
+# Держим build-контекст маленьким: тренировочные данные, ноутбуки, git, кэши.
+
+.git/
+notebooks/
+__pycache__/
+**/__pycache__/
+*.ipynb
+.ipynb_checkpoints/
+*.py[cod]
+.venv/
+venv/
+.vscode/
+.idea/
+
+# Heavy raw data — not needed for inference
+# Тяжёлые сырые данные — не нужны для инференса
+data/raw/
+data/reviews/
+data/games/
+
+# Processed parquet not needed at serving (keep only games.parquet)
+# Processed parquet, не нужные для сервинга (оставляем только games.parquet)
+data/processed/*.parquet
+!data/processed/games.parquet
+
+# Training-only requirements
+requirements.txt

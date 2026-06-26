@@ -1,0 +1,10 @@
+# Inference-only dependencies (no torch / implicit / sentence-transformers).
+# Зависимости только для инференса (без torch / implicit / sentence-transformers).
+numpy
+pandas
+pyarrow
+lightgbm
+faiss-cpu
+fastapi
+uvicorn
+pydantic

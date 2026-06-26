@@ -1,0 +1,19 @@
+# Core data / ML
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+pyarrow
+
+# Retrieval / ranking
+implicit
+sentence-transformers
+torch
+faiss-cpu
+lightgbm
+
+# Serving
+fastapi
+uvicorn
+pydantic
