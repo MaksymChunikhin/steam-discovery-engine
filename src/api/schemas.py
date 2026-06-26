@@ -18,6 +18,7 @@ class RecommendationResponse(BaseModel):
 class SimilarGame(BaseModel):
     game_id: int
     title: str
+    score: float
 
 
 class SimilarResponse(BaseModel):

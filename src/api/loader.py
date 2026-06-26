@@ -179,15 +179,15 @@ class RecommendationPipeline:
         if int(game_id) not in c["item_index"]:
             return None
         row = c["item_index"][int(game_id)]
-        _, idx = self.sem_index.search(
+        sims, idx = self.sem_index.search(
             np.ascontiguousarray(c["item_sem"][row:row + 1], dtype=np.float32), k + 1)
         out = []
-        for j in idx[0]:
+        for j, d in zip(idx[0], sims[0]):
             j = int(j)
             if j == row:
                 continue
             gid = int(c["item_ids"][j])
-            out.append({"game_id": gid, "title": self._title(gid)})
+            out.append({"game_id": gid, "title": self._title(gid), "score": round(float(d), 4)})
             if len(out) == k:
                 break
         return out
