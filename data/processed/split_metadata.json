@@ -1,0 +1,10 @@
+{
+  "dataset": "interactions.parquet",
+  "strategy": "leave_last_out",
+  "timestamp_column": "unix_timestamp_created",
+  "tie_break": "game_id",
+  "n_users": 113552,
+  "n_games": 2872,
+  "train_size": 787585,
+  "test_size": 113552
+}
